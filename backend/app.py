@@ -1,7 +1,9 @@
-# app.py
 from flask import Flask, request, jsonify
-from model import predict_error
+import pickle
 from flask_cors import CORS
+import os
+from util import prediction
+
 
 app = Flask(__name__)
 CORS(app)
@@ -10,10 +12,12 @@ CORS(app)
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.get_json()
-    parameter1 = data["parameter1"]
-    parameter2 = data["parameter2"]
-    error_prediction = predict_error(parameter1, parameter2)
-    return jsonify({"prediction": error_prediction})
+    count = data["parameter1"]
+    mode = data["parameter2"]
+    percent = data["parameter3"]
+    distribution = data["parameter4"]
+    error = prediction(count, mode, percent, distribution)
+    return error
 
 
 if __name__ == "__main__":
