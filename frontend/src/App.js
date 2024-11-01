@@ -24,7 +24,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:5000/predict', {
+      const response = await axios.post('http://127.0.0.1:8080/predict', {
         parameter1: parseFloat(count),
         parameter2: selection,
         parameter3: selection === "percent" ? parseFloat(percentValue) : selection,
